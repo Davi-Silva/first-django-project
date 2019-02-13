@@ -9,6 +9,6 @@ class Courses(models.Model):
     
 
 class OldCourses(models.Model):
-    title = models.TextField(default='Old course')
+    title = models.CharField(max_length=120) # max_length = required
     description = models.TextField(default='This is a description of the old course...')
     price = models.TextField(default='99.99')

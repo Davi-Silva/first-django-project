@@ -71,9 +71,11 @@ __On the PowerShell type the following commands:__
 __On [app_name]/'models.py' create a *Class* [model_name] with the following codes:__
 
     $ class Courses(models.Model):
-        title = models.TextField(default='New course')
-        description = models.TextField(default='This is a description of the new course...')
-        price = models.TextField(default='99.99')
+        title       = models.CharField(max_length=120) 
+        description = models.TextField(blank=True, null=True)
+        price       = models.DecimalField(decimal_places=2, max_digits=1000, default=0.00)
+        summary     = models.TextField(blank=False, null=True) 
+        feature     = models.BooleanField() #null=True, default=True
 
 __On [app_name]/'admin.py' import the following *Class* previously create on [app_name]/'models.py' by typing:__
 
