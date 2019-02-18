@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coding for Entrepreneurs is doing Try Django</title>
+
+
+</head>
+<body>
+    <!-- INCLUDE ANOTHER TEMPLATE INTO ANOTHER TEMPLATE -->
+    {% include 'navbar.html' %}
+
+    <!-- IT BRINGS THE 'BASE.HTML' TEMPLATE A PAGE -->
+    {% block content %}
+    
+    {% endblock  %}
+
+    <!-- IT BRINGS THE 'BASE.HTML' TEMPLATE A PAGE -->
+    {% block another_content %}
+
+    {% endblock %}
+
+</body>
+</html>
