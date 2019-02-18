@@ -11,3 +11,7 @@ class Product(models.Model):
     feature     = models.BooleanField(default=True) #null=True, default=True
 
 
+class Course(models.Model):
+    title       = models.CharField(max_length=30)
+    description = models.TextField(default='')
+    price       = models.DecimalField(max_digits=1000, decimal_places=2)
