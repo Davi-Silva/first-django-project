@@ -11,16 +11,16 @@ def product_detail_view(request):
     return render(request, "products/product_detail.html", my_context)
 
 # Create a form view
-def product_create_view(request):
-    form = ProductForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = ProductForm()
+# def product_create_view(request):
+#     form = ProductForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         form = ProductForm()
 
-    my_context = {
-        'form': form
-    }
-    return render(request, "products/product_create.html", my_context)
+#     my_context = {
+#         'form': form
+#     }
+#     return render(request, "products/product_create.html", my_context)
 
 # def product_create_view(request):
 #     # print(request.POST)
@@ -47,5 +47,14 @@ def product_create_view(request):
 #     }
 #     return render(request, "products/product_create.html", my_context)
 
+def render_initial_data(request):
+    initial_data = {
+        "title": "This is my awesome title"
+    }
+    form = RawProductForm(request.POST or None, initial=initial_data)
+    context = {
+        "form" : form
+    }
+    return render(request, "products/product_create.html", context)
 
 
