@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>In App template: {{ object.title }}</h1>
+<h1>Product title: {{ object.title }}</h1>
 <p>
     {% if object.description != None and object.description != ''%}
     {{ object.description }}
@@ -10,5 +10,15 @@
     {% endif %}
 </p>
 
+<p>Email: {{ object.email }}</p>
+
 <p>{{ object.price }}</p>
+
+
+<p>
+    <a href="./">Back</a>
+     | 
+     <a href="{{ object.id }}/delete/">Delete this item</a>
+</p>
+
 {% endblock content %}

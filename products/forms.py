@@ -1,5 +1,6 @@
 from django import forms
 from .models import Product
+import re
 
 class ProductForm(forms.ModelForm):
     title       = forms.CharField(
@@ -9,17 +10,6 @@ class ProductForm(forms.ModelForm):
                 "placeholder" : "Title",
                 "class" : "title one",
                 "id" : "title",
-            }
-        )
-    )
-
-    email       = forms.EmailField(
-        label = '',
-        widget=forms.EmailInput(
-            attrs={
-                "class" : "email",
-                "id" : "email",
-                "placeholder" : "E-mail"
             }
         )
     )
@@ -39,25 +29,40 @@ class ProductForm(forms.ModelForm):
 
     price       = forms.DecimalField(initial = 0.0, label = '')
 
+    email       = forms.EmailField(
+        label = '',
+        widget=forms.EmailInput(
+            attrs={
+                "class" : "email",
+                "id" : "email",
+                "placeholder" : "E-mail"
+            }
+        )
+    )
+
     class Meta:
         model = Product
         fields = [
             'title',
             'description',
+            'email',
             'price'
         ]
 
     def clean_title(self, *args, **kwargs):
         title = self.cleaned_data.get("title")
-        if not "title" in title.lower():
-            raise forms.ValidationError("This is not a valid title")
+        regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+        if not (regex.search(title) == None): 
+            raise forms.ValidationError("Special symbol is not allowed")
         return title
 
 
     def clean_email(self, *args, **kwargs):
         email = self.cleaned_data.get("email")
-        if not email.endswith("edu"):
-            raise forms.ValidationError("This is not a valid title")
+        if not ((email.endswith("com")) 
+        and not (email.endswith("br")) 
+        and not (email.endswith("ca"))):
+            raise forms.ValidationError("Invalid E-mail")
         return email
 
 
